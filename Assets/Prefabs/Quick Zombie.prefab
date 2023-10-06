@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6137555075900616876, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
@@ -88,4 +89,5 @@ PrefabInstance:
       value: Quick Zombie
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}

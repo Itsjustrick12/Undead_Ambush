@@ -261,19 +261,20 @@ public class Spawner : MonoBehaviour
     private void UpdateDifficulty() { 
         if (currentWave <= 5)
         {
+            waveBufferTime = 4f;
             difficulty = Difficulty.Easy;
         } else if (currentWave <= 20)
         {
-            waveBufferTime =3.5f;
+            waveBufferTime = 3.5f;
             difficulty = Difficulty.Normal;
         } else if (currentWave <= 50)
         {
-            waveBufferTime = 3f;
+            waveBufferTime = 3.5f;
             difficulty = Difficulty.Hard;
         }
         else
         {
-            waveBufferTime =3;
+            waveBufferTime = 3f;
             difficulty = Difficulty.Legend;
         }
     }

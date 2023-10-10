@@ -97,8 +97,10 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         
-        if (((allSpawned && (FindObjectOfType<GameManager>().counter == zSpawned)) && !allDead )&&!endless) {
+        if (((allSpawned && (FindObjectOfType<GameManager>().kills == zSpawned)) && !allDead )&&!endless) {
             allDead = true;
+            FindObjectOfType<GameManager>().updateWave(currentWave);
+
             //End the game and display victory UI
             FindObjectOfType<GameManager>().Victory();
         }
@@ -117,6 +119,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < Waves.Length; i++) {
             
             currentWave++;
+            FindObjectOfType<GameManager>().updateWave(currentWave);
             //Create local variables and store the corresponding values from the current wave
             t = Waves[i].type;
             zI = Waves[i].zombieIndex;

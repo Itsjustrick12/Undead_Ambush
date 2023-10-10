@@ -14,6 +14,6 @@ public class WavesCompleted : MonoBehaviour
 
     public void UpdateText()
     {
-        text.text = "You survived " + (FindObjectOfType<Spawner>().currentWave-1) + " waves" + " and defeated " + FindObjectOfType<GameManager>().counter +" zombies!";
+        text.text = "You survived " + (FindObjectOfType<Spawner>().currentWave-1) + " waves" + " and defeated " + FindObjectOfType<GameManager>().kills + " zombies!";
     }
 }

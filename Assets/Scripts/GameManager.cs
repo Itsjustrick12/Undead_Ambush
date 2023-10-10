@@ -5,7 +5,11 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public PlayerMovement player;
-    public int counter = 0;
+    
+    //Game Stats
+    public int kills = 0;
+    private int waveNumber = 0;
+
     public DeathCounter dCounter;
 
     //Game Over UI
@@ -26,25 +30,34 @@ public class GameManager : MonoBehaviour
 
     //For Fullscreen
     public bool isFullscreen = true;
-    
+
+    public PlayerData playerData;
 
     private void Start()
     {
+        playerData = SaveManager.Load();
+
         if (!Screen.fullScreen)
         {
             isFullscreen = false;
         }
 
-
+        //Toggle all UI elements
         PausedInterface.SetActive(true);
         PausedInterface.SetActive(false);
         SettingsInterface.SetActive(true);
         SettingsInterface.SetActive(false);
         shopUI.SetActive(true);
         shopUI.SetActive(false);
+
+        //Ensure that time is resumed when game starts
         UnPauseTime();
+
+        //Get reference to scripts
         player = FindObjectOfType<PlayerMovement>();
         GOUI = GameOverInterface.GetComponent<GameOverUI>();
+
+        //Hide UI that should not be showing
         VictoryScreen.SetActive(false);
         GameOverInterface.SetActive(false);
         PausedInterface.SetActive(false);
@@ -95,12 +108,20 @@ public class GameManager : MonoBehaviour
 
     public void addToCounter()
     {
-        counter++;
-        dCounter.UpdateText(counter);
+        kills++;
+        dCounter.UpdateText(kills);
 
     }
 
+    public void updateWave(int wave)
+    {
+        waveNumber = wave;
+    }
+
     public void GameOver(bool playerDead) {
+        //Update the player's save Data
+        UpdateSaveData();
+
         if (playerDead)
         {
             AudioManager.Instance.PlaySFX("ZombieBite");
@@ -117,6 +138,9 @@ public class GameManager : MonoBehaviour
 
     public void Victory()
     {
+        //Update the player's save Data
+        UpdateSaveData();
+
         PauseTime();
         VictoryScreen.SetActive(true);
     }   
@@ -144,5 +168,26 @@ public class GameManager : MonoBehaviour
             Screen.fullScreen = true;
             isFullscreen = true;
         }
+    }
+
+    private void UpdateSaveData()
+    {
+        //Only update these stats if playing endless mode
+        if (endlessMode)
+        {
+            //If the player hit a new kill high score, update their save data
+            if (kills >= playerData.highestKills)
+            {
+                playerData.highestKills = kills;
+            }
+
+            if (waveNumber >= playerData.highestWave)
+            {
+                playerData.highestWave = waveNumber;
+            }
+        }
+
+        //Save the player's current stats
+        SaveManager.Save(playerData);
     }
 }

@@ -50,8 +50,6 @@ public class GameManager : MonoBehaviour
         shopUI.SetActive(true);
         shopUI.SetActive(false);
 
-        //Ensure that time is resumed when game starts
-        UnPauseTime();
 
         //Get reference to scripts
         player = FindObjectOfType<PlayerMovement>();
@@ -62,6 +60,8 @@ public class GameManager : MonoBehaviour
         GameOverInterface.SetActive(false);
         PausedInterface.SetActive(false);
         
+        //Ensure that time is resumed when game starts
+        UnPauseTime();
     }
 
     private void Update()

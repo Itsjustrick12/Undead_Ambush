@@ -18,7 +18,7 @@ MonoBehaviour:
   fireRate: 0.5
   mBullets: 5
   currentBullets: 5
-  rTime: 0.75
+  rTime: 1
   bSpeed: 27.5
   maxPierce: 1
   gunShot: {fileID: 0}

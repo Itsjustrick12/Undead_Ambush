@@ -15,12 +15,14 @@ public class GunsUI : MonoBehaviour
     public Sprite bullet;
     public Sprite emptyBullet;
 
+    bool isReloading = false;
+
     
 
     // Update is called once per frame
     void Update()
     {
-        if (currentGun != null)
+        if (currentGun != null && !isReloading)
         {
             
 
@@ -50,6 +52,26 @@ public class GunsUI : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator reloadBullets(float waitTime)
+    {
+        for (int i = 0; i < currentGun.currentBullets; i++)
+        {
+            if (i < currentGun.currentBullets)
+            {
+                bullets[i].sprite = bullet;
+            }
+            yield return new WaitForSeconds(waitTime);
+        }
+        isReloading = false;
+    }
+
+    public void reloadAnim(float reloadTime)
+    {
+        isReloading = true;
+        StartCoroutine("reloadBullets", reloadTime / currentGun.mBullets);
+
     }
 
     public void ChangeGunUI(Gun newGun)

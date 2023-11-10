@@ -203,9 +203,10 @@ public class Shooting : MonoBehaviour
 
     IEnumerator TimedReload() {
         isReloading = true;
-        yield return new WaitForSeconds(reloadTime);
-        bulletsRemaining = maxBullets;
         currentGun.currentBullets = maxBullets;
+        bulletsRemaining = maxBullets;
+        FindObjectOfType<GunsUI>().reloadAnim(reloadTime);
+        yield return new WaitForSeconds(reloadTime);
         isReloading = false;
     }
 

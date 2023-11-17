@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
@@ -66,6 +67,12 @@ public class Spawner : MonoBehaviour
     private int zSpawned = 0;
     private bool allDead = false;
 
+    //For Spawning Boss:
+    public int bossWave = 50;
+    public bool bossDead = false;
+    public GameObject bossPrefab;
+
+
     //For WaveDisplayer
     public WaveDisplayer waveDisplayer;
     public int currentWave = 0;
@@ -120,6 +127,21 @@ public class Spawner : MonoBehaviour
             
             currentWave++;
             FindObjectOfType<GameManager>().updateWave(currentWave);
+
+            //Handle boss wave if needed:
+            if (currentWave == bossWave)
+            {
+                //Add a time buffer and spawn the boss
+                yield return new WaitForSeconds(waveBufferTime);
+                waveDisplayer.UpdateText(currentWave, totalWaves);
+
+                _sp.transform.position = new Vector3(spawnPoints[0].position.x, (spawnPoints[1].position.y + spawnPoints[0].position.y)/2, _sp.position.z);
+                GameObject bossObj = Instantiate(bossPrefab, _sp.transform);
+
+                //Wait for the boss to get killed
+                yield return new WaitUntil(() => bossDead);
+            }
+
             //Create local variables and store the corresponding values from the current wave
             t = Waves[i].type;
             zI = Waves[i].zombieIndex;
@@ -347,5 +369,10 @@ public class Spawner : MonoBehaviour
         //Assign all random values to the temp wave
         temp = new Wave(tempType,tempZI,tempAmt,tempDelay);
         return temp;
+    }
+
+    public void setBossDead(bool isDead)
+    {
+        bossDead = isDead;
     }
 }

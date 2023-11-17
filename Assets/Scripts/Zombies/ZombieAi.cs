@@ -15,10 +15,10 @@ public class ZombieAi : MonoBehaviour
     protected Rigidbody2D rb;
     protected Animator animator;
 
-    private GameManager gameManager;
+    protected GameManager gameManager;
     protected bool isDead = false;
 
-    [SerializeField] private SimpleFlash flashEffect;
+    [SerializeField] protected SimpleFlash flashEffect;
     
     // Start is called before the first frame update
     
@@ -44,7 +44,7 @@ public class ZombieAi : MonoBehaviour
        
     }
     
-    public void TakeDamage (float damage, DamageType type)
+    virtual public void TakeDamage (float damage, DamageType type)
     {
         if (!isDead)
         {

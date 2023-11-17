@@ -13713,6 +13713,9 @@ MonoBehaviour:
   - {fileID: 5744947199229950673, guid: 28551b11baa05b742ae567dca7333e1c, type: 3}
   - {fileID: 2621417813806731653, guid: 7bf7663cc3179d24d8adbf51097daeb1, type: 3}
   heightOffset: -0.5
+  bossWave: 3
+  bossDead: 0
+  bossPrefab: {fileID: 2621417813806731648, guid: 46d9c04131500194c9546e72cf91d06a, type: 3}
   waveDisplayer: {fileID: 0}
   currentWave: 0
 --- !u!4 &1481612550

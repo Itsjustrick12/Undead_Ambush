@@ -78,10 +78,12 @@ public class Spawner : MonoBehaviour
     public int currentWave = 0;
     private int totalWaves;
 
+
     GameObject zombieContainer;
 
     void Start()
     {
+        
         zombieContainer = GameObject.Find("Enemy Container");
         waveDisplayer = FindObjectOfType<WaveDisplayer>();
 
@@ -128,20 +130,6 @@ public class Spawner : MonoBehaviour
             currentWave++;
             FindObjectOfType<GameManager>().updateWave(currentWave);
 
-            //Handle boss wave if needed:
-            if (currentWave == bossWave)
-            {
-                //Add a time buffer and spawn the boss
-                yield return new WaitForSeconds(waveBufferTime);
-                waveDisplayer.UpdateText(currentWave, totalWaves);
-
-                _sp.transform.position = new Vector3(spawnPoints[0].position.x, (spawnPoints[1].position.y + spawnPoints[0].position.y)/2, _sp.position.z);
-                GameObject bossObj = Instantiate(bossPrefab, _sp.transform);
-
-                //Wait for the boss to get killed
-                yield return new WaitUntil(() => bossDead);
-            }
-
             //Create local variables and store the corresponding values from the current wave
             t = Waves[i].type;
             zI = Waves[i].zombieIndex;
@@ -174,6 +162,21 @@ public class Spawner : MonoBehaviour
             else if (t == WaveType.RevArrow)
             {
                 yield return StartCoroutine(SpawnRevArrow(amt, zI, d));
+
+            }
+
+            //Handle boss wave if needed:
+            if (currentWave == bossWave)
+            {
+                //Add a time buffer and spawn the boss
+                yield return new WaitForSeconds(waveBufferTime);
+                waveDisplayer.UpdateText(currentWave, totalWaves);
+
+                _sp.transform.position = new Vector3(spawnPoints[0].position.x, (spawnPoints[1].position.y + spawnPoints[0].position.y) / 2, _sp.position.z);
+                GameObject bossObj = Instantiate(bossPrefab, _sp.transform);
+
+                //Wait for the boss to get killed
+                yield return new WaitUntil(() => bossDead);
             }
 
             //If endless prep next wave by setting it as first and reset i so function doesnt go out of bounds

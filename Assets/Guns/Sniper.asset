@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3436c83a317fda443ad74ff21b634022, type: 3}
   m_Name: Sniper
   m_EditorClassIdentifier: 
-  UISprite: {fileID: 21300000, guid: 3430ac42479579947bcf131e6e2ad374, type: 3}
+  UISprite: {fileID: 21300000, guid: 32eea9bce7431d34790268a024b969de, type: 3}
   sprite: {fileID: 21300000, guid: f600ff9abeca87e41978b450c259d58a, type: 3}
   damage: 5
   fireRate: 1
   mBullets: 3
-  currentBullets: 3
+  currentBullets: 2
   rTime: 1.25
   bSpeed: 35
   maxPierce: 2

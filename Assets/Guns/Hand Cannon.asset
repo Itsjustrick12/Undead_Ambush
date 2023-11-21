@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3436c83a317fda443ad74ff21b634022, type: 3}
   m_Name: Hand Cannon
   m_EditorClassIdentifier: 
-  UISprite: {fileID: 21300000, guid: 845a25364a72028489810d67de69b3eb, type: 3}
+  UISprite: {fileID: 21300000, guid: 299e2b58f278f6d4b845bfd28c0dfc19, type: 3}
   sprite: {fileID: 21300000, guid: 491c3f8b97708844aa2fe179c9242b71, type: 3}
   damage: 3
   fireRate: 0.5
   mBullets: 5
-  currentBullets: 5
+  currentBullets: 3
   rTime: 1
   bSpeed: 27.5
   maxPierce: 1

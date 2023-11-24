@@ -11,6 +11,7 @@ public class BossAI : ZombieAi
     private bool facingRight = true;
     private float maxHealth;
     private GameObject bossUI;
+    [SerializeField] private float lungePause;
 
     void Start()
     {
@@ -130,5 +131,27 @@ public class BossAI : ZombieAi
     {
         transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
         facingRight = !facingRight;
+    }
+
+    IEnumerator startLunge()
+    {
+        isPaused = true;
+        yield return new WaitForSeconds(lungePause);
+        LungeTowards();
+        yield return new WaitForSeconds(lungePause);
+        isPaused = false;
+    }
+
+    private void LungeTowards()
+    {
+        Debug.Log("Lunging");
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            StartCoroutine("startLunge");
+        }
     }
 }

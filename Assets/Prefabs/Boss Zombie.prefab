@@ -122,6 +122,7 @@ MonoBehaviour:
   health: 100
   worth: 100
   flashEffect: {fileID: 2621417813806731679}
+  lungePause: 2
 --- !u!114 &2621417813806731679 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6137555075900616874, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}

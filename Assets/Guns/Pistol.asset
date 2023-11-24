@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3436c83a317fda443ad74ff21b634022, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  UISprite: {fileID: 21300000, guid: 0c672e0a444df8744b44a3b147dc37f7, type: 3}
+  UISprite: {fileID: 21300000, guid: 80709b3f9b021684cbba25f290dde167, type: 3}
   sprite: {fileID: 21300000, guid: 4a0e0a91c60d15b40b714b2c7bb92558, type: 3}
   damage: 1
   fireRate: 0.2
   mBullets: 12
-  currentBullets: 5
+  currentBullets: 12
   rTime: 0.75
   bSpeed: 20
   maxPierce: 0

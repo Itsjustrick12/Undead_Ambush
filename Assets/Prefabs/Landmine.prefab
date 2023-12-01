@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8f5094b998f81e498e95399c6df0066, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 5
   speed: 3
   explosionRadius: 3
   blinkSprite: {fileID: 21300000, guid: aff1c885045c49b4cbb6510795ef2535, type: 3}

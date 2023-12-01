@@ -174,6 +174,7 @@ public class Spawner : MonoBehaviour
 
                 _sp.transform.position = new Vector3(spawnPoints[0].position.x, (spawnPoints[1].position.y + spawnPoints[0].position.y) / 2, _sp.position.z);
                 GameObject bossObj = Instantiate(bossPrefab, _sp.transform);
+                bossObj.transform.parent = zombieContainer.transform;
 
                 //Wait for the boss to get killed
                 yield return new WaitUntil(() => bossDead);

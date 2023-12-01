@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class BossAI : ZombieAi
@@ -8,10 +9,16 @@ public class BossAI : ZombieAi
     private Transform playerLocation;
     private PlayerMovement player;
     private HealthBar healthUI;
-    private bool facingRight = true;
+    private bool facingRight = false;
     private float maxHealth;
     private GameObject bossUI;
-    [SerializeField] private float lungePause;
+    [SerializeField] private float lungeCharge = 1;
+    [SerializeField] private float lungeCooldown = 3;
+    private float cooldown = 0;
+
+    [SerializeField] private float viewDistance = 2;
+    [SerializeField] private float lungePower = 10;
+    private bool isLunging = false;
 
     void Start()
     {
@@ -29,63 +36,41 @@ public class BossAI : ZombieAi
     void FixedUpdate()
     {
         playerLocation = player.gameObject.transform;
+
         if (!isDead)
         {
             //If in the middle of a lunge, dont move
-            if (!isPaused)
+            if (isPaused || !CheckCooldown())
             {
-                //Follow the player on the x axis
-                if (transform.position.x > playerLocation.position.x)
-                {
-                    //If player is to the left, face left and walk left
-                    if (facingRight)
-                    {
-                        flipX();
-                    }
-                    rb.velocity = new Vector2(-speed, rb.velocity.y);
-
-
-                }
-                else if (transform.position.x < playerLocation.position.x)
-                {
-                    //If player is to the left, face left and walk left
-                    if (!facingRight)
-                    {
-                        flipX();
-                    }
-                    rb.velocity = new Vector2(speed, rb.velocity.y);
-                }
-                else
-                {
-                    rb.velocity = new Vector2(0f, rb.velocity.y);
-                }
-
-                //Follow the player on the y axis
-                if (transform.position.y < playerLocation.position.y)
-                {
-                    //If player is above, walk upwards
-                    rb.velocity = new Vector2(rb.velocity.x, speed);
-
-
-                }
-                else if (transform.position.y > playerLocation.position.y)
-                {
-                    //If player is below, walk downwards
-                    rb.velocity = new Vector2(rb.velocity.x, -speed);
-                }
-                else
-                {
-                    rb.velocity = new Vector2(rb.velocity.x, 0f);
-                }
-
-
+                rb.velocity = Vector2.zero;
             }
-        }
-        else
-        {
-            rb.velocity = Vector2.zero;
-        }
+            else if (!isPaused && !isLunging)
+            {
+                //If not on cooldown, move around
+                checkForPlayer();
 
+                //Handle movement (determine direction to move)
+
+                Vector2 moveDir = (playerLocation.position - transform.position).normalized;
+                Move(moveDir);
+                
+            }
+
+        }
+    }
+
+    private void Move(Vector2 direction)
+    {
+        rb.velocity = new Vector2(direction.x * speed, direction.y * speed);
+
+        if (direction.x > 0 && !facingRight)
+        {
+            flipX();
+        }
+        else if (direction.x < 0 && facingRight)
+        {
+            flipX();
+        }
     }
 
     //Overload the TakeDamage to update the spawner to allow the waves to resume
@@ -136,22 +121,60 @@ public class BossAI : ZombieAi
     IEnumerator startLunge()
     {
         isPaused = true;
-        yield return new WaitForSeconds(lungePause);
-        LungeTowards();
-        yield return new WaitForSeconds(lungePause);
+        rb.velocity = Vector2.zero;
+        //Get the direction the boss needs to face to get the player before waiting
+        Vector2 dir = (playerLocation.position - transform.position).normalized;
+        yield return new WaitForSeconds(lungeCharge);
         isPaused = false;
+        isLunging = true;
+        Debug.Log("Lunging!");
+        LungeTowards(dir);
+        yield return new WaitForSeconds(lungeCharge/2);
+        isLunging = false;
+
+        cooldown = lungeCooldown;
+
     }
 
-    private void LungeTowards()
+    private void LungeTowards(Vector2 direction)
     {
-        Debug.Log("Lunging");
+        rb.AddForce(direction * lungePower);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void checkForPlayer()
     {
-        if (collision.tag == "Player")
+        RaycastHit2D hit;
+
+        Vector3 sightPosition = new Vector3(transform.position.x, transform.position.y);
+        if (facingRight)
         {
-            StartCoroutine("startLunge");
+            hit = Physics2D.Raycast(sightPosition, Vector2.right, viewDistance);
+        }
+        else
+        {
+            hit = Physics2D.Raycast(sightPosition, Vector2.left, viewDistance);
+        }
+
+        if (hit.collider != null)
+        {
+            if (hit.collider.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Player Spotted!");
+                StartCoroutine(startLunge());
+            }
+        }
+    }
+
+    private bool CheckCooldown()
+    {
+        cooldown -= Time.deltaTime;
+        if (cooldown <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

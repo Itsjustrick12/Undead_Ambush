@@ -83,7 +83,7 @@ PrefabInstance:
     - target: {fileID: 6137555075900616883, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 40f5e1aeda6327c4f905b955e6d8ddba, type: 3}
+      objectReference: {fileID: 21300000, guid: c63d8ff5225cb1c468ba487baff688de, type: 3}
     - target: {fileID: 6137555075900616885, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
       propertyPath: m_Name
       value: Quick Zombie

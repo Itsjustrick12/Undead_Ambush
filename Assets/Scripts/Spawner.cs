@@ -86,7 +86,7 @@ public class Spawner : MonoBehaviour
         
         zombieContainer = GameObject.Find("Enemy Container");
         waveDisplayer = FindObjectOfType<WaveDisplayer>();
-
+        FindObjectOfType<GameManager>().endlessMode = endless;
         //If theres a set number of waves, make the ui display how many waves there will be
         if (!endless)
         {

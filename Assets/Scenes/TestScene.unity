@@ -1017,7 +1017,7 @@ MonoBehaviour:
   PausedInterface: {fileID: 1516652038}
   SettingsInterface: {fileID: 591720426}
   gamePaused: 0
-  endlessMode: 1
+  endlessMode: 0
   shopUI: {fileID: 119713184}
   isFullscreen: 0
   playerData:
@@ -7999,7 +7999,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7785467, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -14798,7 +14798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2146a1ab7591e4ab8cb31ec063003f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endless: 1
+  endless: 0
   Waves:
   - type: 1
     zombieIndex: 0

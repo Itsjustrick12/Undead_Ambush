@@ -14,6 +14,13 @@ public class WaveDisplayer : MonoBehaviour
 
     public void UpdateText(int current, int total)
     {
-        text.text = current + "/" + total;
+        if (total > 0)
+        {
+            text.text = current + "/" + total;
+        }
+        else
+        {
+            text.text = current.ToString();
+        }
     }
 }

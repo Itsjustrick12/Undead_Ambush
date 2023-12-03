@@ -67,4 +67,14 @@ public class CinemachineShake : MonoBehaviour
             shakeOn = true;
         }
     }
+
+    public void turnOffShake()
+    {
+        shakeOn = false;
+    }
+
+    public void turnOnShake()
+    {
+        shakeOn = true;
+    }
 }

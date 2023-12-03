@@ -62,12 +62,22 @@ public class AudioManager : MonoBehaviour
         
         if (musicSource.volume != 0)
         {
-            musicSource.volume = 0;
+            muteMusic();
         }
         else
         {
-            musicSource.volume = 1;
+            unMuteMusic();
         }
+    }
+
+    public void muteMusic()
+    {
+        musicSource.volume = 0;
+    }
+
+    public void unMuteMusic()
+    {
+        musicSource.volume = 1;
     }
 
     public void ToggleMuteSFX()
@@ -75,13 +85,24 @@ public class AudioManager : MonoBehaviour
 
         if (sfxSource.volume != 0)
         {
-            sfxSource.volume = 0;
+            muteSFX();
         }
         else
         {
-            sfxSource.volume = 1;
+            unMuteSFX();
         }
     }
+
+    public void muteSFX()
+    {
+        sfxSource.volume = 0;
+    }
+
+    public void unMuteSFX()
+    {
+        sfxSource.volume = 1;
+    }
+
 
     public void UpdateMusicVol(float volume)
     {

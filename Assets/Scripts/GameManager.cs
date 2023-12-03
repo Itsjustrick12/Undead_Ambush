@@ -33,9 +33,15 @@ public class GameManager : MonoBehaviour
 
     public PlayerData playerData;
 
+    private AudioManager audioManager;
+
     private void Start()
     {
         playerData = SaveManager.Load();
+
+        audioManager = FindObjectOfType<AudioManager>();
+
+        LoadSettings();
 
         if (!Screen.fullScreen)
         {
@@ -189,5 +195,45 @@ public class GameManager : MonoBehaviour
 
         //Save the player's current stats
         SaveManager.Save(playerData);
+    }
+
+    public void UpdateSettingsData(bool music, bool sfx, bool screenShake)
+    {
+        playerData.musicOn = music;
+        playerData.SFXOn = sfx;
+        playerData.screenShakeOn = screenShake;
+        SaveManager.Save(playerData);
+    }
+
+    public void LoadSettings() { 
+        if (playerData.musicOn)
+        {
+            audioManager.unMuteMusic();
+        }
+        else
+        {
+            audioManager.muteMusic();
+        }
+
+        if (playerData.SFXOn)
+        {
+            audioManager.unMuteSFX();
+        }
+        else
+        {
+            audioManager.muteSFX();
+        }
+        if (playerData.screenShakeOn)
+        {
+            //Turn on ss
+            CinemachineShake shake = FindObjectOfType<CinemachineShake>();
+            shake.turnOnShake();
+        }
+        else
+        {
+            //Turn off ss
+            CinemachineShake shake = FindObjectOfType<CinemachineShake>();
+            shake.turnOffShake();
+        }
     }
 }

@@ -10,17 +10,17 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private CheckButton musicBTN;
     [SerializeField] private CheckButton sfxBTN;
     [SerializeField] private CheckButton screenShakeBTN;
-    AudioManager audioManager;
+
+    [SerializeField] AudioManager audioManager;
     GameManager gameManager;
 
     private void Start()
     {
-        audioManager = FindObjectOfType<AudioManager>();
+
         gameManager = FindObjectOfType<GameManager>();
     }
     private void OnEnable()
     {
-        audioManager = FindObjectOfType<AudioManager>();
         gameManager = FindObjectOfType<GameManager>();
 
         LoadSettings();

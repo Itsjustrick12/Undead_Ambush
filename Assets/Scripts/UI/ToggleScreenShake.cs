@@ -6,6 +6,10 @@ public class ToggleScreenShake : MonoBehaviour
 {
     public void Toggle()
     {
-        CinemachineShake.Instance.ToggleShake();
+        CinemachineShake CMShake = CinemachineShake.Instance;
+        if (CMShake != null)
+        {
+            CMShake.ToggleShake();
+        }
     }
 }

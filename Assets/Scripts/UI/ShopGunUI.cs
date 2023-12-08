@@ -16,6 +16,7 @@ public class ShopGunUI : MonoBehaviour
     public Gun gunProduct;
     public bool purchased = false;
     public bool upgraded = false;
+    StoreCoinUI storeCoin;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class ShopGunUI : MonoBehaviour
         GunImage.sprite = gunProduct.UISprite;
         purchasePrice = gunProduct.cost;
         purchasePriceText.text = "$" + purchasePrice.ToString();
+        storeCoin = FindObjectOfType<StoreCoinUI>();
 
         upgradePrice = gunProduct.upgradeCost;
         upgradePriceText.text = "$" + upgradePrice.ToString();
@@ -32,27 +34,6 @@ public class ShopGunUI : MonoBehaviour
         if (purchased)
         {
             HidePurchaseOptions();
-        }
-    }
-
-    public void Update()
-    {
-        if (CanPurchase())
-        {
-
-        }
-        else
-        {
-
-        }
-
-        if (CanUpgrade())
-        {
-
-        }
-        else
-        {
-
         }
     }
 
@@ -65,6 +46,7 @@ public class ShopGunUI : MonoBehaviour
             gunProduct.Reload();
             FindObjectOfType<Shooting>().AddGun(gunProduct);
             playerMon.RemoveCoins(purchasePrice);
+            storeCoin.UpdateCoins(playerMon.coins);
             purchased = true;
             HidePurchaseOptions();
         }

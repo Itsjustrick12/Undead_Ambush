@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Landmine : MonoBehaviour
@@ -40,20 +39,50 @@ public class Landmine : MonoBehaviour
         }
         if (hitInfo.gameObject.tag == "Enemy")
         {
-            AudioManager.Instance.PlaySFX("Explosion");
-            Instantiate(explosionEffect, gameObject.transform.position, Quaternion.identity);
-            CinemachineShake.Instance.ShakeCamera(shakeAmt, shakeTime);
-            Collider2D[] zombies = Physics2D.OverlapCircleAll(transform.position, explosionRadius, 1 << LayerMask.NameToLayer("EnemyLayer"));
-            foreach (Collider2D en in zombies)
-            {
-                ZombieAi zombieAi = en.GetComponent<ZombieAi>();
-                if (zombieAi != null && zombieAi.tag == "Enemy")
-                {
-                    zombieAi.TakeDamage(damage, ZombieAi.DamageType.EXPLOSIVE);
 
+            //If the boss zombie is jumping over a landmine, dont let it get damaged
+            BossAI bAI = hitInfo.gameObject.GetComponent<BossAI>();
+            if (bAI != null)
+            {
+                if (bAI.isLunging)
+                {
+                    return;
                 }
             }
-            Destroy(gameObject);
+
+            Explode();
+            
         }
     }
+
+    private void OnTriggerStay2D(Collider2D hitInfo)
+    {
+        //If the boss zombie is jumping over a landmine, dont let it get damaged
+        BossAI bAI = hitInfo.gameObject.GetComponent<BossAI>();
+        if (bAI != null)
+        {
+            if (!bAI.isLunging)
+            {
+                Explode();
+            }
+        }
+    }
+
+    void Explode() {
+        AudioManager.Instance.PlaySFX("Explosion");
+        Instantiate(explosionEffect, gameObject.transform.position, Quaternion.identity);
+        CinemachineShake.Instance.ShakeCamera(shakeAmt, shakeTime);
+        Collider2D[] zombies = Physics2D.OverlapCircleAll(transform.position, explosionRadius, 1 << LayerMask.NameToLayer("EnemyLayer"));
+        foreach (Collider2D en in zombies)
+        {
+            ZombieAi zombieAi = en.GetComponent<ZombieAi>();
+            if (zombieAi != null && zombieAi.tag == "Enemy")
+            {
+                zombieAi.TakeDamage(damage, ZombieAi.DamageType.EXPLOSIVE);
+
+            }
+        }
+        Destroy(gameObject);
+    }
+
 }

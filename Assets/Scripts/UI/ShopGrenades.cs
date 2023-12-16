@@ -9,7 +9,7 @@ public class ShopGrenades : MonoBehaviour
     [SerializeField] Shooting playerShooting;
     [SerializeField] PlayerMoney playerMoney;
     [SerializeField] TextMeshProUGUI grenadesText;
-
+    private StoreCoinUI storeCoin;
 
     private void OnEnable()
     {
@@ -21,6 +21,7 @@ public class ShopGrenades : MonoBehaviour
         playerShooting = FindObjectOfType<Shooting>();
         playerMoney = FindObjectOfType<PlayerMoney>();
         grenadesText = GetComponentInChildren<TextMeshProUGUI>();
+        storeCoin = FindObjectOfType<StoreCoinUI>();
     }
 
     private void UpdateGrenadeCount()
@@ -40,6 +41,7 @@ public class ShopGrenades : MonoBehaviour
                 UpdateGrenadeCount();
                 FindObjectOfType<GrenadeUI>().UpdateGrenades(playerShooting.GetGrenades());
                 playerMoney.RemoveCoins(grenadeCost);
+                storeCoin.UpdateCoins(playerMoney.coins);
             }
         }
     }

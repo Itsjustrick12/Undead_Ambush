@@ -9,7 +9,7 @@ public class ShopLandmines : MonoBehaviour
     [SerializeField] Shooting playerShooting;
     [SerializeField] PlayerMoney playerMoney;
     [SerializeField] TextMeshProUGUI minesText;
-
+    private StoreCoinUI storeCoin;
 
     private void OnEnable()
     {
@@ -21,6 +21,7 @@ public class ShopLandmines : MonoBehaviour
         playerShooting = FindObjectOfType<Shooting>();
         playerMoney = FindObjectOfType<PlayerMoney>();
         minesText = GetComponentInChildren<TextMeshProUGUI>();
+        storeCoin = FindObjectOfType<StoreCoinUI>();
     }
 
     private void UpdateMinesCount()
@@ -40,6 +41,7 @@ public class ShopLandmines : MonoBehaviour
                 UpdateMinesCount();
                 FindObjectOfType<LandmineUI>().UpdateMines(playerShooting.GetMines());
                 playerMoney.RemoveCoins(minesCost);
+                storeCoin.UpdateCoins(playerMoney.coins);
             }
         }
     }

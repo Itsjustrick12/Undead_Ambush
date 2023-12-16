@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     //Game Over UI
     public GameObject GameOverInterface;
     private GameOverUI GOUI;
+    [SerializeField] HighScoreText HSText;
 
     //Victory Screen
     public GameObject VictoryScreen;
@@ -124,22 +125,25 @@ public class GameManager : MonoBehaviour
         waveNumber = wave;
     }
 
-    public void GameOver(bool playerDead) {
-        //Update the player's save Data
-        UpdateSaveData();
+    public void GameOver(bool playerDead) {   
 
         if (playerDead)
         {
             AudioManager.Instance.PlaySFX("ZombieBite");
             PauseTime();
             GOUI.Infected();
+            HSText.UpdateText(kills, waveNumber, playerData.highestKills, playerData.highestWave+1);
             GameOverInterface.SetActive(true);
         }
         else {
             PauseTime();
             GOUI.Zombie();
+            HSText.UpdateText(kills, waveNumber, playerData.highestKills, playerData.highestWave+1);
             GameOverInterface.SetActive(true);
         }
+
+        //Update the player's save Data
+        UpdateSaveData();
     }
 
     public void Victory()

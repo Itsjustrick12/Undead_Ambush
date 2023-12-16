@@ -8,6 +8,42 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6137555075900616876, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_Size.x
+      value: 0.72752786
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616876, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.99448025
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616876, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.016400218
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616876, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.52738947
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616876, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616876, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616876, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616876, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616876, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6137555075900616878, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
       propertyPath: speed
       value: 1
@@ -19,6 +55,14 @@ PrefabInstance:
     - target: {fileID: 6137555075900616878, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
       propertyPath: health
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616879, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616879, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_Offset.y
+      value: 1.19
       objectReference: {fileID: 0}
     - target: {fileID: 6137555075900616880, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
       propertyPath: m_RootOrder
@@ -77,9 +121,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6137555075900616883, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_Size.x
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616883, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6137555075900616883, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 593975d2dde506e428b767c04d5a7660, type: 3}
+      objectReference: {fileID: 21300000, guid: ca1561e393928a3408f5009f5210fd6b, type: 3}
     - target: {fileID: 6137555075900616883, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -106,6 +158,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6137555075900616885, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}
   m_PrefabInstance: {fileID: 8164423927454982453}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &-6576031638727942886
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2621417813806731648}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7e23ccc3241ee5f458df6444d8a6d647, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &6744374961210023254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,10 +194,11 @@ MonoBehaviour:
   health: 100
   worth: 100
   flashEffect: {fileID: 2621417813806731679}
-  lungeCharge: 1
-  lungeCooldown: 1.5
+  lungeCharge: 1.25
+  lungeCooldown: 0.8
   viewDistance: 4
-  lungePower: 750
+  lungePower: 950
+  isLunging: 0
 --- !u!114 &2621417813806731679 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6137555075900616874, guid: dbe74cc881d02bd4c80cd3d687a8d8e0, type: 3}

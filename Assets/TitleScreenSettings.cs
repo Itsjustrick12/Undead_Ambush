@@ -5,19 +5,19 @@ using UnityEngine;
 public class TitleScreenSettings : MonoBehaviour
 {
     PlayerData playerData;
-    AudioManager audio;
+    AudioManager audioM;
     // Start is called before the first frame update
     void Start()
     {
         playerData = SaveManager.Load();
-        audio = FindObjectOfType<AudioManager>();
+        audioM = FindObjectOfType<AudioManager>();
         if (playerData.musicOn)
         {
-            audio.unMuteMusic();
+            audioM.unMuteMusic();
         }
         else
         {
-            audio.muteMusic();
+            audioM.muteMusic();
         }
     }
 }

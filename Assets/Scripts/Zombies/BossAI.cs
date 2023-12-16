@@ -12,13 +12,12 @@ public class BossAI : ZombieAi
     private bool facingRight = false;
     private float maxHealth;
     private GameObject bossUI;
-    [SerializeField] private float lungeCharge = 1;
     [SerializeField] private float lungeCooldown = 3;
     private float cooldown = 0;
 
     [SerializeField] private float viewDistance = 2;
     [SerializeField] private float lungePower = 10;
-    private bool isLunging = false;
+    public bool isLunging = false;
 
     void Start()
     {
@@ -44,7 +43,7 @@ public class BossAI : ZombieAi
             {
                 rb.velocity = Vector2.zero;
             }
-            else if (!isPaused && !isLunging)
+            else if (!isPaused && !isLunging && CheckCooldown())
             {
                 //If not on cooldown, move around
                 checkForPlayer();
@@ -86,6 +85,10 @@ public class BossAI : ZombieAi
 
         if (health <= 0)
         {
+           BossBeatenSave();
+           animator.SetTrigger("IsDead");
+           rb.velocity = Vector2.zero;
+           isDead = true;
            bossUI.GetComponent<Animator>().SetTrigger("Hide");
 
             //Update the spawner to resume the waves after the boss dies
@@ -95,15 +98,8 @@ public class BossAI : ZombieAi
                 temp.setBossDead(true);
             }
 
-            isDead = true;
             AudioManager.Instance.PlaySFX("ZombieHurt2");
-            if (type != DamageType.EXPLOSIVE)
-            {
-                FindObjectOfType<PlayerMoney>().AddCoins(worth);
-            }
-
-            //Play death animation here
-            Destroy(this.gameObject);
+            FindObjectOfType<PlayerMoney>().AddCoins(worth);
         }
         else
         {
@@ -122,17 +118,8 @@ public class BossAI : ZombieAi
     {
         isPaused = true;
         rb.velocity = Vector2.zero;
-        //Get the direction the boss needs to face to get the player before waiting
-        Vector2 dir = (playerLocation.position - transform.position).normalized;
-        yield return new WaitForSeconds(lungeCharge);
-        isPaused = false;
-        isLunging = true;
-        Debug.Log("Lunging!");
-        LungeTowards(dir);
-        yield return new WaitForSeconds(lungeCharge/2);
-        isLunging = false;
-
-        cooldown = lungeCooldown;
+        animator.SetTrigger("Charge");
+        yield return new WaitForSeconds(0f);
 
     }
 
@@ -176,5 +163,36 @@ public class BossAI : ZombieAi
         {
             return false;
         }
+    }
+
+    public void Jump()
+    {
+        isPaused = false;
+        isPaused = false;
+        isLunging = true;
+        animator.SetTrigger("Jump");
+        Vector2 dir = (playerLocation.position - transform.position).normalized;
+        LungeTowards(dir);
+    }
+
+    public void Fall()
+    {
+        rb.velocity = new Vector2 (0f, -1);
+        rb.velocity = Vector2.zero;
+        isLunging = false;
+        animator.SetTrigger("Fall");
+        cooldown = lungeCooldown;
+    }
+
+    public void SetLungeFalse ()
+    {
+        isLunging = false;
+    }
+
+    private void BossBeatenSave()
+    {
+        PlayerData pd = SaveManager.Load();
+        pd.beatEndless = true;
+        SaveManager.Save(pd);
     }
 }

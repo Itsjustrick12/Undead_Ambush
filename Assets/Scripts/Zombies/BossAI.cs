@@ -83,7 +83,7 @@ public class BossAI : ZombieAi
 
         }
 
-        if (health <= 0)
+        if (health <= 0 && !isDead)
         {
            BossBeatenSave();
            animator.SetTrigger("IsDead");
@@ -99,6 +99,7 @@ public class BossAI : ZombieAi
             }
 
             AudioManager.Instance.PlaySFX("ZombieHurt2");
+            Debug.Log("Adding " + worth + "coins");
             FindObjectOfType<PlayerMoney>().AddCoins(worth);
         }
         else
@@ -181,6 +182,8 @@ public class BossAI : ZombieAi
         rb.velocity = Vector2.zero;
         isLunging = false;
         animator.SetTrigger("Fall");
+        AudioManager.Instance.PlaySFX("GroundPound");
+        CinemachineShake.Instance.ShakeCamera(2f, 0.25f);
         cooldown = lungeCooldown;
     }
 

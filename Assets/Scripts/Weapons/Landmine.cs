@@ -49,7 +49,7 @@ public class Landmine : MonoBehaviour
                     return;
                 }
             }
-
+            AudioManager.Instance.PlaySFX("EmptyClip");
             Explode();
             
         }
@@ -63,6 +63,7 @@ public class Landmine : MonoBehaviour
         {
             if (!bAI.isLunging)
             {
+                AudioManager.Instance.PlaySFX("EmptyClip");
                 Explode();
             }
         }

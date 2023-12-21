@@ -132,13 +132,13 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.PlaySFX("ZombieBite");
             PauseTime();
             GOUI.Infected();
-            HSText.UpdateText(kills, waveNumber, playerData.highestKills, playerData.highestWave+1);
+            HSText.UpdateText(kills, waveNumber, playerData.highestKills, playerData.highestWave-1);
             GameOverInterface.SetActive(true);
         }
         else {
             PauseTime();
             GOUI.Zombie();
-            HSText.UpdateText(kills, waveNumber, playerData.highestKills, playerData.highestWave+1);
+            HSText.UpdateText(kills, waveNumber, playerData.highestKills, playerData.highestWave-1);
             GameOverInterface.SetActive(true);
         }
 
